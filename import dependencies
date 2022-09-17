@@ -1,0 +1,20 @@
+from distutils.util import strtobool
+from email import message
+from tkinter.messagebox import YES
+import pyttsx3
+import datetime
+import speech_recognition as sr
+import wikipedia
+import smtplib
+import webbrowser as wb
+import psutil
+import pyjokes
+import os
+import pyautogui
+import random
+import json
+import requests
+from urllib.request import urlopen
+import wolframalpha
+import time
+import pywhatkit
