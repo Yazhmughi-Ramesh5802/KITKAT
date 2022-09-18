@@ -9,3 +9,4 @@ Following are the few Features:
     3) searching a specific location
     4) Taking screenshots on command and much more interesting features.
     5) Send whatsApp messages and images to a specified person
+    6) Calculating Math problems, fetching latest news [using API]
