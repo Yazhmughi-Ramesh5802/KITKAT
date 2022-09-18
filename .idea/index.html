@@ -1,0 +1,42 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Jarvis</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1>Hello mother Earth</h1>-->
+<!--<script src="/eel.js"></script>-->
+<!--<script sec="script.js"></script>-->
+<!--</body>-->
+<!--</html>-->
+<html>
+    <head>
+        <title>
+            Virtual  assistant
+        </title>
+        <link rel="stylesheet" type="text/css" href="index.css">
+    </head>
+    <body>
+    <div class="card">
+        <button id="start" onclick="connect()">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      Start
+    </button>
+  Kit Kat<br>listening...
+</div>
+<p id="content"></p>
+<!--<a href="https://mythrillfiction.com/" target="_blank">Mythrill</a>-->
+    <script type = "text/javascript" src = "/eel.js"></script>
+    <script>
+        eel.expose(display);
+function display(output){
+    document.getElementById("content").innerHTML = output
+}
+    </script>
+        <script type = "text/javascript" src = "script.js"></script>
+    </body>
+</html>
