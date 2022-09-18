@@ -1,5 +1,43 @@
+from distutils.util import strtobool
+from email import message
+from tkinter.messagebox import YES
+import pyttsx3
+import datetime
+import speech_recognition as sr
+import wikipedia
+import smtplib
+import webbrowser as wb
+import psutil
+import pyjokes
+import os
+import pyautogui
+import random
+
+import json
+import requests
+from urllib.request import urlopen
+import wolframalpha
+import time
+import pywhatkit
+
+
+
 engine = pyttsx3.init()
-wolframalpha_app_id = r'your_api_key'
+voices = engine.getProperty('voices')
+engine.setProperty('voice', voices[1].id)
+wolframalpha_app_id = r'YTY9HW-97G2QJGVVP'
+api_key = r'067c76dbe8caac93fa25cdf648abf7a5'
+base_url = "http://api.openweathermap.org/data/2.5/weather?"
+
+
+# def sendEmail(to,content):
+#     server = smtplib.SMTP('smtp.gmail.com',587)
+#     server.ehlo()
+#     server.starttls()
+#     #my acc
+#     server.login('yamujawa3@gmail.com','yamini@1406')
+#     server.sendmail('yamujawa3@gmail.com',to,content)
+#     server.close()
 
 def speak(audio):
     # engine.say("hello world")
@@ -37,6 +75,7 @@ def joke():
 def TakeCommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
+        # r.adjust_for_ambient_noise(source)
         print("Listening...")
         r.pause_threshold = 1
         audio = r.listen(source)
@@ -62,12 +101,12 @@ def screenshot():
     img = pyautogui.screenshot()
     img.save(r'C:\Users\Yamini\Desktop\imgs\screenshot.jpg')
 
-contacts = [['yalmugi','+91 xxxxxxxxxx'],['vishal', '+91 xxxxxxxxxx'], ['kumar', '+91 xxxxxxxxxx'], ['abinash', '+91 xxxxxxxxxx'], ['a','+91 xxxxxxxxxx']]
+contacts = [['yalmugi','+91 7358855843'],['vishal', '+91 8667748941'], ['kumar', '+91 9087395904'], ['abinash', '+91 8220928970'], ['aishu','+91 73057 05570']]
 
 def watsapp_image():
     speak("Whom do u wanna send message");
     reciever = TakeCommand().lower();
-    send = '+91 xxxxxxxxxx'
+    send = '+91 7358855843'
 
     flag = 0
     for i in range(len(contacts)):
@@ -82,6 +121,8 @@ def watsapp_image():
         speak("Sorry number not in contact list");
 
 def watsapp():
+    #pywhatkit.sendwhatmsg_instantly('+91 9843491240', 'hello daddy', 15, True, 3)
+
     speak("Whom do u wanna send message");
     reciever = TakeCommand().lower();
     print(reciever)
@@ -102,6 +143,29 @@ def watsapp():
     else:
         speak("Sorry number not in contact list");
 
+def Introduction():
+            print("I am Kit-Kat 1.0 , Personal AI assistant , "
+            "I am created by the team Techi Geeks , "
+            "I can help you in various regards , "
+            "I can search for you on the Internet , "
+            "I can also grab definitions for you from wikipedia , "
+            "In layman terms , I can try to make your life a bed of roses , "
+            "Where you just have to command me , and I will do it for you  ")
+            speak("I am Kit-Kat 1.0 , Personal AI assistant , "
+            "I am created by the team Techi Geeks , "
+            "I can help you in various regards , "
+            "I can search for you on the Internet , "
+            "I can also grab definitions for you from wikipedia , "
+            "In layman terms , I can try to make your life a bed of roses , "
+            "Where you just have to command me , and I will do it for you ")
+
+def Creator():
+        print("Techi Geek is an extra-ordinary team who has a passion for Robotics, Artificial Intelligence and Machine Learning ,"
+        "they are very co-ordinated and supportive of each other ,"
+        "If you are facing any problem regarding the 'kit-kat', they will be glad to help you ")
+        speak("Techi Geek is an extra-ordinary team who has a passion for Robotics, Artificial Intelligence and Machine Learning ,"
+        "they are very co-ordinated and supportive of each other ,"
+        "If you are facing any problem regarding the 'kit-kat', they will be glad to help you ")
 # TakeCommand()
 
 if __name__ == "__main__":
@@ -127,25 +191,27 @@ if __name__ == "__main__":
 
     speak("may I know your name please")
     name = TakeCommand().lower()
-
+    print("pleased to meet you," + name)
     speak("pleased to meet you," + name)
 
-    speak("Jarvis at your service. How can I help you?")
+    print("KITKAT at your service. How can I help you?")
+    speak("KITKAT at your service. How can I help you?")
     
 
     while True:
         query = TakeCommand().lower()
         if 'time' in query:
             time_()
+            
         elif 'date' in query:
             date_()
-        elif 'wikipedia' in query:
-            speak("searching..")
-            query=query.replace('wikipedia','')
-            result = wikipedia.summary(query,sentences=2)
-            speak('According to wikipedia')
-            print(result)
-            speak(result)
+        # elif 'wikipedia' in query:
+        #     speak("searching..")
+        #     query=query.replace('wikipedia','')
+        #     result = wikipedia.summary(query,sentences=2)
+        #     speak('According to wikipedia')
+        #     print(result)
+        #     speak(result)
         
         elif 'search' in query:
             try:
@@ -169,13 +235,24 @@ if __name__ == "__main__":
 
         elif 'battery' in query or 'power' in query:
             cpu()
+        elif 'i love you' in query or 'love' in query :
+            lst=['Yeah, thanks. I love myself too.','takes out pepper spray','I love you too, but as a friend.','Forget it, you know nothing about me!','I am shutting my eyes tight so everything goes black.','And I’m calling the police.','I mean...who doesn’t love me?']
+            a=random.randint(0,len(lst)-2)
+            speak(lst[a])
+            print(lst[a])
+
         
         elif 'joke' in query or 'laugh' in query:
             joke()
+            print("I can see you laughing...hahahahaha")
             speak("I can see you laughing...hahahahaha")
         
         elif 'go offline' in query or 'off' in query or 'stop' in query or'terminate' in query:
+            print('going offline.see you later,Dear'+name)
+            #print('KITKAT is Sorry for causing the inconvienience. Kitkat will be back with a bang . kitkat 2 point o will see u soon')
+            
             speak('going offline.see you later,Dear'+name)
+            #speak('KITKAT is Sorry for causing the inconvienience. Kitkat will be back with a bang . kitkat 2 point o will see u soon')
             quit()
 
         elif 'word' in query:
@@ -183,7 +260,7 @@ if __name__ == "__main__":
             # ms_word = r'C:\ProgramData\Microsoft\Windows\Start Menu\Programs'
             ms_word = r"C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE"
             os.startfile(ms_word)
-        elif 'write a note' in query or 'take notes' in query or 'notes' in query or 'note' in query:
+        elif 'write a note' in query or 'take notes' in query:
             speak('I am ready to take notes.Let\'s start')
             notes = TakeCommand()
             file = open('notes.txt','w')
@@ -221,18 +298,22 @@ if __name__ == "__main__":
                 
             speak("select a random number")
             rand = (TakeCommand().lower())
-            while('number' not in rand and rand != 'random'):                       
-                speak("I could not understand you. Please Try again.")          
+            while('number' not in rand and rand != 'random'):                       #used while loop to keep the jarvis on the speak command untill req. command is given.
+                speak("I could not understand you. Please Try again.")          #first used 'rand' before while then again after, so that rand is already defind, and Input is taken and then checked if it is according to reuirement or not. And if it is not which means while loop is true, then commands under 'while loop' will execute untill desired approach.As it will again ask the user for input in the same block. 
                 rand = (TakeCommand().lower())
 
             if 'number' in rand:
                     rand = int(rand.replace("number ",""))
                     os.startfile(os.path.join(songs_dir,songs[rand]))
-                    continue                                                    
+                    continue                                                    #'continue' is used, so that after executing the commands in 'if' or 'elif' block, it will move to the next part of execution (or code). but in this case as this is the last execution of related function then it will move to the next function (i.e. in this code, it will be TakeCommand() )
             elif 'random' in rand:
                     rand = random.randint(1,40)
                     os.startfile(os.path.join(songs_dir,songs[rand]))
                     continue
+        
+        elif 'do you remember anything' in query or 'reminder' in query:
+            remember =open('memory.txt', 'r')
+            speak("You asked me to remeber that"+remember.read())
 
         elif 'remember' in query or 'remind' in query or 'keep in mind' in query:
             speak("what is it that you want me to remind?")
@@ -241,10 +322,12 @@ if __name__ == "__main__":
             remember = open('memory.txt','w')
             remember.write(memory)
             remember.close()
-
-        elif 'do you remember anything' in query or 'reminder' in query:
-            remember =open('memory.txt', 'r')
-            speak("You asked me to remeber that"+remember.read())
+        
+        elif 'introduce' in query or 'who is kitkat' in query:
+            Introduction()
+        
+        elif 'creator' in query or 'founder' in query or 'owner' in query:
+            Creator()
 
         elif 'news' in query or 'happening' in query or 'happenings' in query:
             
@@ -311,28 +394,52 @@ if __name__ == "__main__":
             "And I think it is just a mere illusion , "
             "It is waste of time")
 
-        elif 'SKCET' in query or 'sri krishna college' in query:
-            speak('SRI KRISHNA COLLEGE OF ENGINEERING AND TECHNOLOGY, one of the top universities in south India, encourages innovation, Research and Development, and student empowerment through entrepreneurship to provide the best, most modern technical education possible.SRI KRISHNA COLLEGE OF ENGINEERING AND TECHNOLOGY is one of the premium institutions of south India, that imparts highest quality state-of-the-art technical education by providing impetus to innovation, Research and Development and empowering students with Entrepreneurship skills.')
-        
-        elif 'who is the HOD of information technology department' in query or 'head of department' in query:
-            speak('It\'s our honourable mistress susila who is the pillar of the department.')
-
         elif 'principal' in query or 'Janet' in query:
             speak('Principal J. Janet.With 25 years of administrative and teaching expertise in engineering education leadership, Dr.J.Janet outlines an illustrious professional career. incredibly adaptable in the areas of academia, R&D, high-impact industry networking, and institutional visibility. Dr. J. Janet is exceptional in displaying her aura through articulate communication and versatile in cultivating and keeping high performance teams.')
+            print('Principal J. Janet.With 25 years of administrative and teaching expertise in engineering education leadership, Dr.J.Janet outlines an illustrious professional career. incredibly adaptable in the areas of academia, R&D, high-impact industry networking, and institutional visibility. Dr. J. Janet is exceptional in displaying her aura through articulate communication and versatile in cultivating and keeping high performance teams.')
 
-        elif 'whatsapp web' in query:
+        elif 'college' in query or 'sri krishna college' in query:
+            speak('SRI KRISHNA COLLEGE OF ENGINEERING AND TECHNOLOGY, one of the top universities in south India, encourages innovation, Research and Development, and student empowerment through entrepreneurship to provide the best, most modern technical education possible.SRI KRISHNA COLLEGE OF ENGINEERING AND TECHNOLOGY is one of the premium institutions of south India, that imparts highest quality state-of-the-art technical education by providing impetus to innovation, Research and Development and empowering students with Entrepreneurship skills.')
+            print('SRI KRISHNA COLLEGE OF ENGINEERING AND TECHNOLOGY, one of the top universities in south India, encourages innovation, Research and Development, and student empowerment through entrepreneurship to provide the best, most modern technical education possible.SRI KRISHNA COLLEGE OF ENGINEERING AND TECHNOLOGY is one of the premium institutions of south India, that imparts highest quality state-of-the-art technical education by providing impetus to innovation, Research and Development and empowering students with Entrepreneurship skills.')
+
+
+        elif 'who is the HOD of information technology department' in query or 'head of the department' in query:
+            speak('It\'s our honourable mistress susila who is the pillar of the department.')
+            print('It\'s our honourable mistress susila who is the pillar of the department.')
+
+        
+
+        elif 'whatsapp web' in query or 'whatsapp' in query:
             watsapp()
+        
+        elif 'image' in query or 'whatsapp image' in query:
+            watsapp_image()
 
-        def Introduction():
-            speak("I am Kit-Kat 1.0 , Personal AI assistant , "
-            "I am created by the team Techi Geeks , "
-            "I can help you in various regards , "
-            "I can search for you on the Internet , "
-            "I can also grab definitions for you from wikipedia , "
-            "In layman terms , I can try to make your life a bed of roses , "
-            "Where you just have to command me , and I will do it for you , ")
 
-        def Creator():
-            speak("Techi Geek is an extra-ordinary team who has a passion for Robotics, Artificial Intelligence and Machine Learning ,"
-            "they are very co-ordinated and supportive of each other ,"
-            "If you are facing any problem regarding the 'kit-kat', they will be glad to help you ")
+        
+                
+        # elif "weather" in query: 
+			
+		# 	# Google Open weather website 
+		# 	# to get API of Open weather
+        #     api_key = "067c76dbe8caac93fa25cdf648abf7a5"
+        #     base_url = "http://api.openweathermap.org/data /2.5/weather?q="
+        #     speak(" City name ")
+        #     print("City name : ")
+        #     city_name = TakeCommand()
+        #     complete_url = base_url + "appid =" + api_key + "&q =" + city_name
+        #     response = requests.get(complete_url)
+        #     x = response.json()
+            
+        #     if x["cod"] != "404":
+        #         y = x["main"]
+        #         current_temperature = y["temp"]
+        #         current_pressure = y["pressure"]
+        #         current_humidiy = y["humidity"]
+        #         z = x["weather"]
+        #         weather_description = z[0]["description"]
+        #         print(" Temperature (in kelvin unit) = " +str(current_temperature)+"\n atmospheric pressure (in hPa unit) ="+str(current_pressure) +"\n humidity (in percentage) = " +str(current_humidiy) +"\n description = " +str(weather_description))
+                
+        #     else:
+        #         speak(" City Not Found ") 
+
