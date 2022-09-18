@@ -8,3 +8,4 @@ Following are the few Features:
     2) Playing songs and videos from your local directory
     3) searching a specific location
     4) Taking screenshots on command and much more interesting features.
+    5) Send whatsApp messages and images to a specified person
